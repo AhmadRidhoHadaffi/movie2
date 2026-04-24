@@ -30,7 +30,7 @@ class MovieController extends Controller
 
     public function detail($id)
     {
-        $movie = Movie::find($id);
+        $movie = $this->movieService->getMovie($id);
         return view('detail', compact('movie'));
     }
 

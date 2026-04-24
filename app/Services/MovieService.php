@@ -32,4 +32,9 @@ class MovieService
     {
         return $this->movieRepo->getAll($search);
     }
+
+    public function getMovie($id)
+    {
+        return $this->movieRepo->find($id);
+    }
 }
