@@ -37,4 +37,25 @@ class MovieService
     {
         return $this->movieRepo->find($id);
     }
+
+    public function updateMovie($id, $data, $file = null)
+    {
+        $movie = $this->movieRepo->find($id);
+
+        if ($file) {
+            // hapus file lama
+            $path = public_path('images/' . $movie->foto_sampul);
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            // upload baru
+            $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images'), $fileName);
+
+            $data['foto_sampul'] = $fileName;
+        }
+
+        return $this->movieRepo->update($id, $data);
+    }
 }
