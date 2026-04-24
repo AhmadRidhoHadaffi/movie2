@@ -38,7 +38,7 @@
       </div>
 
       <footer class="bg-success text-center text-white py-2">
-        Copyright &copy; 2023 by Yori Adi Atma
+        Copyright &copy; 2026 by Ahmad Ridho Hadaffi
       </footer>
 
     <script src="/bootstrap/bootstrap.bundle.min.js"></script>
