@@ -10,9 +10,16 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreMovieRequest;
+use App\Services\MovieService;
 
 class MovieController extends Controller
 {
+    protected $movieService;
+
+    public function __construct(MovieService $movieService)
+    {
+        $this->movieService = $movieService;
+    }
 
     public function index()
     {
@@ -42,14 +49,10 @@ class MovieController extends Controller
     {
          $validated = $request->validated();
 
-        $randomName = Str::uuid()->toString();
-        $fileName = $randomName . '.jpg';
-
-        $request->file('foto_sampul')->move(public_path('images'), $fileName);
-
-        $validated['foto_sampul'] = $fileName;
-
-        Movie::create($validated);
+        $this->movieService->createMovie(
+            $validated,
+            $request->file('foto_sampul')
+        );
 
         return redirect('/')->with('success', 'Data berhasil disimpan');
     }
