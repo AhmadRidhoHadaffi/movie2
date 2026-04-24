@@ -24,12 +24,7 @@ class MovieController extends Controller
     public function index()
     {
 
-        $query = Movie::latest();
-        if (request('search')) {
-            $query->where('judul', 'like', '%' . request('search') . '%')
-                ->orWhere('sinopsis', 'like', '%' . request('search') . '%');
-        }
-        $movies = $query->paginate(6)->withQueryString();
+        $movies = $this->movieService->getMovies(request('search'));
         return view('homepage', compact('movies'));
     }
 

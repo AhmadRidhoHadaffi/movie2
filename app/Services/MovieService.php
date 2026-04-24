@@ -27,4 +27,9 @@ class MovieService
 
         return $this->movieRepo->create($data);
     }
+
+    public function getMovies($search)
+    {
+        return $this->movieRepo->getAll($search);
+    }
 }
