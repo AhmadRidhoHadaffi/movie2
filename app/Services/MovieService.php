@@ -58,4 +58,16 @@ class MovieService
 
         return $this->movieRepo->update($id, $data);
     }
+
+    public function deleteMovie($id)
+    {
+        $movie = $this->movieRepo->find($id);
+
+        $path = public_path('images/' . $movie->foto_sampul);
+        if (File::exists($path)) {
+            File::delete($path);
+        }
+
+        return $this->movieRepo->delete($id);
+    }
 }
